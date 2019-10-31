@@ -8,6 +8,8 @@ public class PlayerBase : MonoBehaviour
     public float bulletForce;
     public Rigidbody2D projectile;
     public Transform projectileSpawnPos;
+    public int ammoCount;
+    [HideInInspector] public int shotsFired = 0;
 
     [HideInInspector] public Rigidbody2D rb;
 
@@ -24,7 +26,7 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
@@ -35,11 +37,13 @@ public class PlayerBase : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         rb.MoveRotation(angle);//Quaternion.AngleAxis(angle, Vector3.forward);
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && ammoCount > 0)
             Shoot();
     }
     void Shoot()
     {
+        shotsFired++;
+
         if (rb.gravityScale == 0f)
             rb.gravityScale = 0.75f;
 
@@ -48,5 +52,6 @@ public class PlayerBase : MonoBehaviour
         
         rb.velocity = Vector3.zero;
         rb.AddForce(-bulletClone.velocity.normalized * shootForce, ForceMode2D.Impulse);
+        ammoCount--;
     }
 }
