@@ -14,6 +14,7 @@ public class PlayerBase : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb;
 
     private Vector3 dir;
+    private GameManager gm;
 
     private static PlayerBase instance;
     public static PlayerBase Instance
@@ -29,6 +30,7 @@ public class PlayerBase : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        gm = GameManager.Instance;
     }
 
     void Update()
@@ -53,5 +55,8 @@ public class PlayerBase : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.AddForce(-bulletClone.velocity.normalized * shootForce, ForceMode2D.Impulse);
         ammoCount--;
+
+        gm.GetComponent<AudioSource>().clip = gm.shootAudio;
+        gm.GetComponent<AudioSource>().Play();
     }
 }

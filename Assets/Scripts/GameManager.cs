@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public bool levelComplete;
+    public AudioClip shootAudio;
+    public AudioClip goalReachedAudio;
     private bool winScreenShown = false;
     private PlayerUI ui;
 
