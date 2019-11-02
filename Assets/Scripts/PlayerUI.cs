@@ -8,7 +8,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Text currentShotsText;
     [SerializeField] private Text minShotsText;
     [SerializeField] private Text currentAmmoText;
-    [HideInInspector] public int minShotAmount;
+    public int minShotAmount;
     [HideInInspector] public int currentShotAmount;
     [HideInInspector] public int currentAmmoAmount;
     

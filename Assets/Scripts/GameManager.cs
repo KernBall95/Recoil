@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Backspace))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            ReloadLevel(SceneManager.GetActiveScene().buildIndex);
 
         if(levelComplete && !winScreenShown)
         {
@@ -56,5 +56,11 @@ public class GameManager : MonoBehaviour
     public void KillPlayer()
     {
         Destroy(PlayerBase.Instance.gameObject);
+        ReloadLevel(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    void ReloadLevel(int index)
+    {
+        SceneManager.LoadScene(index);
     }
 }
